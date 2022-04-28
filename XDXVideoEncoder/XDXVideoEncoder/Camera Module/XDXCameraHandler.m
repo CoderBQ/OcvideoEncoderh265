@@ -455,6 +455,11 @@
     [captureDevice unlockForConfiguration];
 }
 
+
+// 使用activeFormat方法后,之前使用sessionPreset方法设置的分辨率将自动变为AVCaptureSessionPresetInputPriority,所以如果项目之前有用canSetSessionPreset比较的if语句也都将失效,建议如果项目必须支持高帧率则彻底弃用sessionPreset方法.
+//
+//链接：https://www.jianshu.com/p/6975f706e2e5
+#pragma mark Gravity
 + (BOOL)setCameraFrameRateAndResolutionWithFrameRate:(int)frameRate andResolutionHeight:(CGFloat)resolutionHeight bySession:(AVCaptureSession *)session position:(AVCaptureDevicePosition)position videoFormat:(OSType)videoFormat {
     AVCaptureDevice *captureDevice = [self getCaptureDevicePosition:position];
     
@@ -817,5 +822,6 @@
 }
 
 #pragma mark - Other
+
 
 @end
