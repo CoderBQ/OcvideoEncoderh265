@@ -42,13 +42,13 @@
     [self configureCamera];
     
 }
-
+// Clients may set an AVCaptureSession instance's sessionPreset to AVCaptureSessionPreset3840x2160 to achieve 3840x2160 output.
 #pragma mark - Init
 - (void)configureCamera {
     XDXCameraModel *model = [[XDXCameraModel alloc] initWithPreviewView:self.view
                                                                  preset:AVCaptureSessionPreset1280x720
-                                                              frameRate:30
-                                                       resolutionHeight:720
+                                                              frameRate:60
+                                                       resolutionHeight:2160
                                                             videoFormat:kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange
                                                               torchMode:AVCaptureTorchModeOff
                                                               focusMode:AVCaptureFocusModeContinuousAutoFocus
@@ -77,14 +77,14 @@
 - (void)configurevideoEncoder {
     
     // You could select h264 / h265 encoder.
-    self.videoEncoder = [[XDXVideoEncoder alloc] initWithWidth:1280
-                                                        height:720
-                                                           fps:30
+    self.videoEncoder = [[XDXVideoEncoder alloc] initWithWidth:3840
+                                                        height:2160
+                                                           fps:60
                                                        bitrate:2048
                                        isSupportRealTimeEncode:NO
-                                                   encoderType:XDXH264Encoder]; // XDXH264Encoder
+                                                   encoderType:XDXH265Encoder]; // XDXH264Encoder
     self.videoEncoder.delegate = self;
-    [self.videoEncoder configureEncoderWithWidth:1280 height:720];
+    [self.videoEncoder configureEncoderWithWidth:3840 height:2160];
 }
 
 #pragma mark - Button Action
